@@ -228,6 +228,7 @@ en:
         menu:
           admins: Scoped Admins
           checks: System Compatibility
+          custom_registration_form: Custom registration form
           editors: Editor Hacks
           livechat: Live Chat
           menu_hacks: Menu Tweaks

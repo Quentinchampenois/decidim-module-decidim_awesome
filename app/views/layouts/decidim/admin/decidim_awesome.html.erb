@@ -50,6 +50,11 @@ end %>
           <%= icon_aria_selected_link_to I18n.t("menu.livechat", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:livechat), "chat" %>
         </li>
       <% end %>
+      <% if config_enabled? :custom_registration_form %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:custom_registration_form)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.custom_registration_form", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:custom_registration_form), "layers" %>
+        </li>
+      <% end %>
       <li <% if is_active_link?(decidim_admin_decidim_awesome.checks_path) %> class="is-active" <% end %>>
         <%= icon_aria_selected_link_to I18n.t("menu.checks", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.checks_path, "pulse" %>
       </li>

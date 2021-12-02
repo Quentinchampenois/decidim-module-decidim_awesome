@@ -1,0 +1,8 @@
+<div class="callout warning"><%= t("caution", scope: "decidim.decidim_awesome.admin.config") %></div>
+<div class="row column decidim_awesome-form">
+  <% if config_enabled? :custom_registration_form %>
+    <h3>custom registration form</h3>
+  <% end %>
+</div>
+
+<%= javascript_include_tag "decidim/decidim_awesome/admin/form_exit_warn" %>

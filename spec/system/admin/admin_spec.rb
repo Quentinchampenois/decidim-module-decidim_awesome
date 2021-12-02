@@ -209,4 +209,27 @@ describe "Visit the admin page", type: :system do
       let(:prefix) { "" }
     end
   end
+
+  context "when visiting custom registration form" do
+    context "when custom registration form are enabled" do
+      before do
+        click_link "Custom registration form"
+      end
+
+      it_behaves_like "has menu link", "custom_registration_form"
+
+      it "renders the page" do
+        expect(page).to have_current_path(decidim_admin_decidim_awesome.config_path("custom_registration_form"))
+        expect(page).to have_content(/Tweaks for custom_registration_form/i)
+      end
+    end
+
+    context "when custom fields are disabled" do
+      let(:disabled_features) do
+        [:custom_registration_form]
+      end
+
+      it_behaves_like "do not have menu link", "custom_registration_form"
+    end
+  end
 end

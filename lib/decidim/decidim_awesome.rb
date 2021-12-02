@@ -84,6 +84,11 @@ module Decidim
       {}
     end
 
+    # Custom registration form configuration
+    config_accessor :custom_registration_form do
+      {}
+    end
+
     # allows to keep modifications for the main menu
     # can return :disabled to completly remove this feature
     # otherwise it should be an array (some overrides can be specified by default):
