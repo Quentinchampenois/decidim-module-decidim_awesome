@@ -1,20 +1,23 @@
 <div class="callout warning"><%= t("caution", scope: "decidim.decidim_awesome.admin.config") %></div>
 <div class="row column decidim_awesome-form">
-
   <% if config_enabled? :custom_registration_form %>
-    <p class="help-text"><%= t("help.proposal_custom_fields", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-    <p class="help-text"><%= t("help.proposal_custom_fields_example", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+    <p class="help-text"><%= t("help.custom_registration_form", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+    <p class="help-text"><%= t("help.custom_registration_form_example", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+    <p class="help-text"><%= t("help.custom_registration_form_translations", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
     <% form.object.custom_registration_form&.each do |key, value| %>
-      <div class="proposal-custom-field" data-key="<%= key %>">
-        <%= label_tag :custom_registration_form do %>
-          <%= t("config.custom_registration_form", scope: "activemodel.attributes", id: key) %>
-          <%= link_to t(".remove"), decidim_admin_decidim_awesome.custom_registration_form_path(key: key), method: :delete, class: "float-right", data: { confirm: t(".sure_to_remove") } %>
-        <% end %>
-        <%= text_area_tag key, value, name: "config[custom_registration_form][#{key}]", rows: 5 %>
+      <div class="custom_registration_form_container" data-key="<%= key %>">
+        <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "custom_registration_form", key: key, scope: "custom_registration_form_#{key}", delete_path: decidim_admin_decidim_awesome.custom_registration_form_path(key: key) }) %>
+        <p class="form-error is-visible"><%= errors[key.to_sym].join("<br>") if errors %></p>
+        <%= hidden_field_tag key, value, name: "config[custom_registration_form][#{key}]" %>
+        <div class="custom_registration_form_editor">
+          <div class="loading-spinner"></div>
+        </div>
       </div>
     <% end %>
+
     <%= link_to t(".new"), decidim_admin_decidim_awesome.custom_registration_form_index_path, method: :post %>
+
   <% end %>
 </div>
 

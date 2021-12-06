@@ -151,6 +151,20 @@ en:
                 in case the form is not submitted. If the form is submitted, data
                 will be removed. If users remove their LocalStorage data, data won't
                 be restored either.
+              custom_registration_form: Create custom proposal fields that applies
+                only in certain parts of the public web (use the restrictions editor
+                for that)
+              custom_registration_form_example: Data is stored in a XML object using
+                compatible HTML attributes (dl,dt,dd elements) replacing the "body"
+                in a normal proposal.
+              custom_registration_form_translations: "Labels, help text, placeholders
+                and default values can use your application custom translations. \nFor
+                that, instead of using a string literal, use the i18n key (it must
+                containt at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\"
+                instead of \"Title\"\n- \"activemodel.attributes.proposal.address\"
+                instead of \"Address\"\nOr use your own keys in combination with other
+                tools to define translations (eg: using the module Term Customizer):\n
+                - \"myapp.custom_fields.bio\" instead of \"Biography\""
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).

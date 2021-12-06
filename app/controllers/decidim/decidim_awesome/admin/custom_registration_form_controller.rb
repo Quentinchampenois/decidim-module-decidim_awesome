@@ -20,7 +20,7 @@ module Decidim
         end
 
         def destroy
-          DestroyProposalCustomField.call(params[:key], current_organization) do
+          DestroyCustomRegistrationField.call(params[:key], current_organization) do
             on(:ok) do |key|
               flash[:notice] = I18n.t("config.destroy_proposal_custom_field.success", key: key, scope: "decidim.decidim_awesome.admin")
             end
