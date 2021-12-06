@@ -6,11 +6,11 @@
     <p class="help-text"><%= t("help.custom_registration_form_translations", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
     <% form.object.custom_registration_form&.each do |key, value| %>
-      <div class="custom_registration_form_container" data-key="<%= key %>">
+      <div class="custom_fields_container" data-key="<%= key %>">
         <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "custom_registration_form", key: key, scope: "custom_registration_form_#{key}", delete_path: decidim_admin_decidim_awesome.custom_registration_form_path(key: key) }) %>
         <p class="form-error is-visible"><%= errors[key.to_sym].join("<br>") if errors %></p>
         <%= hidden_field_tag key, value, name: "config[custom_registration_form][#{key}]" %>
-        <div class="custom_registration_form_editor">
+        <div class="custom_fields_editor">
           <div class="loading-spinner"></div>
         </div>
       </div>
