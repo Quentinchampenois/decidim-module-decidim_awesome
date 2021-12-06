@@ -81,6 +81,35 @@ module Decidim::DecidimAwesome
           end
         end
       end
+
+      context "when custom registration form" do
+        let(:attributes) do
+          {
+            custom_registration_form: custom_fields
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and invalid JSON" do
+          let(:custom_fields) do
+            {
+              foo: invalid_fields
+            }
+          end
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "and sending labels with html" do
+          let(:valid_fields) { '[{"label":"<p>Santana</p>"}]' }
+
+          it "sanitize labels from html" do
+            expect(subject.custom_registration_form[:foo]).to include("Santana")
+            expect(subject.custom_registration_form[:foo]).not_to include("<p>Santana</p>")
+          end
+        end
+      end
     end
   end
 end

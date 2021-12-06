@@ -8,6 +8,7 @@ en:
         allow_images_in_proposals: Allow images in the proposals editor
         allow_images_in_small_editor: Allow images in the minimal HTML editor
         auto_save_forms: Auto save forms in local storage
+        custom_registration_form: Registration custom fields %{id}
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
         intergram_auto_response: A message that is sent immediately after the user
@@ -109,6 +110,9 @@ en:
             delete: Delete
             edit: Edit
             title: 'Applicable only in these cases:'
+          create_custom_registration_field:
+            error: Error creating a new "custom registration field" box! %{error}
+            success: '"custom registration field" box %{key} created successfully'
           create_proposal_custom_field:
             error: Error creating a new "custom field" box! %{error}
             success: '"custom field" box %{key} created successfully'
@@ -180,6 +184,10 @@ en:
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 to use a Markdown editor instead. Text will be converted and saved
                 as HTML in the database.
+          form_custom_registration_form:
+            new: Add a new "custom fields" box
+            remove: Remove this "custom fields" box
+            sure_to_remove: Are you sure you want to destroy this fields box?
           form_proposal_custom_fields:
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box

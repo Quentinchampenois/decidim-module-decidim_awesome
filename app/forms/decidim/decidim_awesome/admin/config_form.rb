@@ -14,6 +14,7 @@ module Decidim
         attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash
         attribute :proposal_custom_fields, Hash
+        attribute :custom_registration_form, Hash
         attribute :scoped_admins, Hash
         attribute :menu, Array[MenuForm]
         attribute :intergram_for_admins, Boolean
@@ -25,14 +26,16 @@ module Decidim
         attr_accessor :valid_keys
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
-        validate :json_syntax, if: ->(form) { form.proposal_custom_fields.present? }
+        validate :proposal_custom_json_syntax, if: ->(form) { form.proposal_custom_fields.present? }
+        validate :registration_form_json_syntax, if: ->(form) { form.custom_registration_form.present? }
 
         # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
           instance.valid_keys = params.keys.map(&:to_sym) || []
-          instance.sanitize_labels!
+          instance.sanitize_labels_for_proposals!
+          instance.sanitize_labels_for_registration!
           instance
         end
 
@@ -47,8 +50,16 @@ module Decidim
           end
         end
 
-        def json_syntax
-          proposal_custom_fields.each do |key, code|
+        def proposal_custom_json_syntax
+          json_syntax(proposal_custom_fields)
+        end
+
+        def registration_form_json_syntax
+          json_syntax(custom_registration_form)
+        end
+
+        def json_syntax(ary)
+          ary&.each do |key, code|
             next unless code
 
             JSON.parse(code)
@@ -58,11 +69,19 @@ module Decidim
           end
         end
 
-        # formBuilder has a bug and do not sanitize text if users copy/paste text with format in the label input
-        def sanitize_labels!
-          return unless proposal_custom_fields
+        def sanitize_labels_for_proposals!
+          sanitize_labels_for! proposal_custom_fields
+        end
 
-          proposal_custom_fields.transform_values! do |code|
+        def sanitize_labels_for_registration!
+          sanitize_labels_for! custom_registration_form
+        end
+
+        # formBuilder has a bug and do not sanitize text if users copy/paste text with format in the label input
+        def sanitize_labels_for!(ary)
+          return if ary.blank?
+
+          ary.transform_values! do |code|
             next unless code
 
             json = JSON.parse(code)

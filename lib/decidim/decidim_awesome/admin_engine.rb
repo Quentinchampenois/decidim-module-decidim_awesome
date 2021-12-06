@@ -20,6 +20,7 @@ module Decidim
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
+        resources :custom_registration_form, param: :var, only: [:create, :destroy]
         resources :scoped_admins, param: :var, only: [:create, :destroy]
         get :users, to: "config#users"
         post :rename_scope_label, to: "config#rename_scope_label"
