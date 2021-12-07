@@ -32,7 +32,7 @@ describe "Admin manages custom proposal fields", type: :system do
       expect(page).to have_admin_callout("created successfully")
 
       sleep 2
-      page.execute_script("$('.proposal_custom_fields_editor:first')[0].FormBuilder.actions.setData(#{data})")
+      page.execute_script("$('.custom_fields_editor:first')[0].FormBuilder.actions.setData(#{data})")
 
       find("*[type=submit]").click
 
@@ -61,7 +61,7 @@ describe "Admin manages custom proposal fields", type: :system do
       expect(page).to have_content("Street Sweeper")
       expect(page).not_to have_content("Short Bio")
 
-      page.execute_script("$('.proposal_custom_fields_container[data-key=\"foo\"] .proposal_custom_fields_editor')[0].FormBuilder.actions.setData(#{data})")
+      page.execute_script("$('.custom_fields_container[data-key=\"foo\"] .custom_fields_editor')[0].FormBuilder.actions.setData(#{data})")
       find("*[type=submit]").click
 
       sleep 2
@@ -89,7 +89,7 @@ describe "Admin manages custom proposal fields", type: :system do
         expect(page).to have_content("Street Sweeper")
         expect(page).not_to have_content("Short Bio")
 
-        within ".proposal_custom_fields_container[data-key=\"foo\"]" do
+        within ".custom_fields_container[data-key=\"foo\"]" do
           accept_confirm { click_link 'Remove this "custom fields" box' }
         end
 
@@ -114,7 +114,7 @@ describe "Admin manages custom proposal fields", type: :system do
       end
 
       it "adds a new config helper var" do
-        within ".proposal_custom_fields_container[data-key=\"foo\"]" do
+        within ".custom_fields_container[data-key=\"foo\"]" do
           click_link "Add case"
         end
 
@@ -125,7 +125,7 @@ describe "Admin manages custom proposal fields", type: :system do
 
         sleep 2
 
-        within ".proposal_custom_fields_container[data-key=\"foo\"] .constraints-editor" do
+        within ".custom_fields_container[data-key=\"foo\"] .constraints-editor" do
           expect(page).to have_content("Processes")
         end
 
