@@ -73,13 +73,6 @@ module Decidim
           Decidim::Proposals::CollaborativeDraft.include(Decidim::DecidimAwesome::HasProposalExtraFields)
         end
 
-        if DecidimAwesome.enabled?(:weighted_proposal_voting)
-          # add vote weight to proposal vote
-          Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
-          Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
-          Decidim::Proposals::ProposalMCell.include(Decidim::DecidimAwesome::ProposalMCellOverride)
-        end
-
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
