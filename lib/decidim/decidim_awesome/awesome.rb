@@ -110,7 +110,7 @@ module Decidim
     # Different processors can be registered and configured in the component's settings
     # Each processor must account for a cell to display how to vote and a cell to display the results
     config_accessor :weighted_proposal_voting do
-      true
+      false
     end
 
     # Additional sorting methods for proposals
